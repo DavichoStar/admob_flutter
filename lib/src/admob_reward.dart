@@ -5,8 +5,7 @@ import 'package:flutter/services.dart';
 import 'admob_event_handler.dart';
 
 class AdmobReward extends AdmobEventHandler {
-  static const MethodChannel _channel =
-      MethodChannel('admob_flutter/reward');
+  static const MethodChannel _channel = MethodChannel('admob_flutter/reward');
 
   late int id;
   late MethodChannel _adChannel;
@@ -46,7 +45,12 @@ class AdmobReward extends AdmobEventHandler {
   }
 
   void load() async {
-    await _channel.invokeMethod('load', _channelMethodsArguments..['nonPersonalizedAds'] = nonPersonalizedAds..['userId'] = userId..['customData'] = customData);
+    await _channel.invokeMethod(
+        'load',
+        _channelMethodsArguments
+          ..['nonPersonalizedAds'] = nonPersonalizedAds
+          ..['userId'] = userId
+          ..['customData'] = customData);
 
     if (listener != null) {
       await _channel.invokeMethod('setListener', _channelMethodsArguments);
@@ -64,7 +68,7 @@ class AdmobReward extends AdmobEventHandler {
   }
 
   Map<String, dynamic> get _channelMethodsArguments => <String, dynamic>{
-    'id': id,
-    'adUnitId': adUnitId,
-  };
+        'id': id,
+        'adUnitId': adUnitId,
+      };
 }

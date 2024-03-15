@@ -5,8 +5,7 @@ import 'package:flutter/services.dart';
 import 'admob_event_handler.dart';
 
 class AdmobInterstitial extends AdmobEventHandler {
-  static const MethodChannel _channel =
-      MethodChannel('admob_flutter/interstitial');
+  static const MethodChannel _channel = MethodChannel('admob_flutter/interstitial');
 
   late int id;
   late MethodChannel _adChannel;
@@ -42,11 +41,11 @@ class AdmobInterstitial extends AdmobEventHandler {
   }
 
   void load() async {
-    await _channel.invokeMethod('load',
-      _channelMethodsArguments
-        ..['adUnitId'] = adUnitId
-        ..['nonPersonalizedAds'] = nonPersonalizedAds
-    );
+    await _channel.invokeMethod(
+        'load',
+        _channelMethodsArguments
+          ..['adUnitId'] = adUnitId
+          ..['nonPersonalizedAds'] = nonPersonalizedAds);
 
     if (listener != null) {
       await _channel.invokeMethod('setListener', _channelMethodsArguments);
@@ -64,6 +63,6 @@ class AdmobInterstitial extends AdmobEventHandler {
   }
 
   Map<String, dynamic> get _channelMethodsArguments => <String, dynamic>{
-    'id': id,
-  };
+        'id': id,
+      };
 }

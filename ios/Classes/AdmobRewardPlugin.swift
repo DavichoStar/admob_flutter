@@ -124,7 +124,7 @@ public class AdmobRewardPlugin: NSObject, FlutterPlugin {
     }
 }
 
-class AdmobRewardPluginDelegate: NSObject, GADRewardedAdDelegate {
+class AdmobRewardPluginDelegate: NSObject, GADFullScreenContentDelegate {
     let channel: FlutterMethodChannel
     
     init(channel: FlutterMethodChannel) {

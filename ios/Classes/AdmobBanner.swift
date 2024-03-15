@@ -123,7 +123,7 @@ extension AdmobBanner : GADBannerViewDelegate {
         channel.invokeMethod("loaded", arguments: nil)
     }
     
-    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
+    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: NSError) {
         channel.invokeMethod("failedToLoad", arguments: [
             "errorCode": error.code,
             "error": error.localizedDescription

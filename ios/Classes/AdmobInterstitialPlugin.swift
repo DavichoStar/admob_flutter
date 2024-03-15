@@ -22,8 +22,8 @@ import GoogleMobileAds
 
 public class AdmobIntersitialPlugin: NSObject, FlutterPlugin {
     
-    fileprivate var allIds: [Int: GADInterstitial] = [:]
-    fileprivate var delegates: [Int: GADInterstitialDelegate] = [:]
+    fileprivate var allIds: [Int: GADIntersticial] = [:]
+    fileprivate var delegates: [Int: GADIntersticialDelegate] = [:]
     fileprivate var pluginRegistrar: FlutterPluginRegistrar?
 
     fileprivate var interstantialAdUnitId: String?
@@ -91,16 +91,16 @@ public class AdmobIntersitialPlugin: NSObject, FlutterPlugin {
         interstantial.load(request)
     }
     
-    private func getInterstitialAd(id: Int, interstantialAdUnitId: String) -> GADInterstitial {
+    private func getInterstitialAd(id: Int, interstantialAdUnitId: String) -> GADIntersticial {
         if let interstantialAd = allIds[id] {
-            // https://developers.google.com/admob/ios/interstitial#use_gadinterstitialdelegate_to_reload
-            // "GADInterstitial is a one-time-use object. This means once an interstitial is shown, hasBeenUsed returns true and the interstitial can't be used to load another ad. To request another interstitial, you'll need to create a new GADInterstitial object."
+            // https://developers.google.com/admob/ios/interstitial#use_GADIntersticialdelegate_to_reload
+            // "GADIntersticial is a one-time-use object. This means once an interstitial is shown, hasBeenUsed returns true and the interstitial can't be used to load another ad. To request another interstitial, you'll need to create a new GADIntersticial object."
             if (interstantialAd.hasBeenUsed) {
-                let interstantialAd = GADInterstitial(adUnitID: interstantialAdUnitId)
+                let interstantialAd = GADIntersticial(adUnitID: interstantialAdUnitId)
                 allIds[id] = interstantialAd
             }
         } else {
-            let interstantialAd = GADInterstitial(adUnitID: interstantialAdUnitId)
+            let interstantialAd = GADIntersticial(adUnitID: interstantialAdUnitId)
             allIds[id] = interstantialAd
         }
         
@@ -108,7 +108,7 @@ public class AdmobIntersitialPlugin: NSObject, FlutterPlugin {
     }
 }
 
-class AdmobIntersitialPluginDelegate: NSObject, GADInterstitialDelegate {
+class AdmobIntersitialPluginDelegate: NSObject, GADIntersticialDelegate {
     let channel: FlutterMethodChannel
     
     init(channel: FlutterMethodChannel) {
@@ -118,35 +118,35 @@ class AdmobIntersitialPluginDelegate: NSObject, GADInterstitialDelegate {
     // TODO: not sure this exists on iOS.
     // channel.invokeMethod("impression", null)
     
-    func interstitialWillPresentScreen(_ ad: GADInterstitial) {
+    func interstitialWillPresentScreen(_ ad: GADIntersticial) {
         channel.invokeMethod("clicked", arguments: nil)
         channel.invokeMethod("opened", arguments: nil)
     }
 
-    func interstitialWillDismissScreen(_ ad: GADInterstitial) {
+    func interstitialWillDismissScreen(_ ad: GADIntersticial) {
         // Unused
     }
     
-    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+    func interstitialDidDismissScreen(_ ad: GADIntersticial) {
         channel.invokeMethod("closed", arguments: nil)
     }
     
-    func interstitialWillLeaveApplication(_ ad: GADInterstitial) {
+    func interstitialWillLeaveApplication(_ ad: GADIntersticial) {
         channel.invokeMethod("leftApplication", arguments: nil)
     }
 
-    func interstitialDidReceiveAd(_ ad: GADInterstitial) {
+    func interstitialDidReceiveAd(_ ad: GADIntersticial) {
         channel.invokeMethod("loaded", arguments: nil)
     }
 
-    func interstitial(_ ad: GADInterstitial, didFailToReceiveAdWithError error: GADRequestError) {
+    func interstitial(_ ad: GADIntersticial, didFailToReceiveAdWithError error: NSError) {
         channel.invokeMethod("failedToLoad", arguments:  [
             "errorCode": error.code,
             "error": error.localizedDescription
         ])
     }
     
-    func interstitialDidFail(toPresentScreen ad: GADInterstitial) {
+    func interstitialDidFail(toPresentScreen ad: GADIntersticial) {
         channel.invokeMethod("failedToLoad", arguments: ["errorCode": ad.isReady && ad.hasBeenUsed])
     }
 }

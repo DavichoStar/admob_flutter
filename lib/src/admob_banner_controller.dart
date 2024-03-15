@@ -7,11 +7,11 @@ class AdmobBannerController extends AdmobEventHandler {
   AdmobBannerController(int id, Function(AdmobAdEvent, Map<String, dynamic>?)? listener)
       : _channel = MethodChannel('admob_flutter/banner_$id'),
         super(listener) {
-        if (listener != null) {
-          _channel.setMethodCallHandler(handleEvent);
-          _channel.invokeMethod('setListener');
-        }
-      }
+    if (listener != null) {
+      _channel.setMethodCallHandler(handleEvent);
+      _channel.invokeMethod('setListener');
+    }
+  }
 
   void dispose() {
     _channel.invokeMethod('dispose');

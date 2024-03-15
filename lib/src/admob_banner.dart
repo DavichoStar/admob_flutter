@@ -105,8 +105,8 @@ class _AdmobBannerState extends State<AdmobBanner> {
   }
 
   Map<String, dynamic> get bannerCreationParams => <String, dynamic>{
-    'adUnitId': widget.adUnitId,
-    'adSize': widget.adSize.toMap,
-    'nonPersonalizedAds': widget.nonPersonalizedAds,
-  };
+        'adUnitId': widget.adUnitId,
+        'adSize': widget.adSize.toMap,
+        'nonPersonalizedAds': widget.nonPersonalizedAds,
+      };
 }

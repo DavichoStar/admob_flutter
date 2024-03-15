@@ -19,8 +19,7 @@ class Admob {
   }
 
   static Future<Size> bannerSize(AdmobBannerSize admobBannerSize) async {
-    final rawResult =
-        await _channel.invokeMethod('banner_size', admobBannerSize.toMap);
+    final rawResult = await _channel.invokeMethod('banner_size', admobBannerSize.toMap);
     if (rawResult == null) {
       throw Exception('banner_size not provided by platform');
     }
