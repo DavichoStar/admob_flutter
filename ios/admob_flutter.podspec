@@ -3,8 +3,8 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'admob_flutter'
-  s.version          = '1.0.0'
-  s.swift_version    = '5.0'
+  s.version          = '4.0.0'
+  s.swift_version    = '7.0'
   s.summary          = 'Admob plugin that shows banner ads using native platform views.'
   s.description      = <<-DESC
 Admob plugin that shows banner ads using native platform views.
@@ -17,8 +17,8 @@ Admob plugin that shows banner ads using native platform views.
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
   # https://firebase.google.com/docs/ios/setup
-  s.dependency 'Google-Mobile-Ads-SDK', '~> 7.64'
-  s.ios.deployment_target = '9.0'
+  s.dependency 'Google-Mobile-Ads-SDK', '~> 11.2.0'
+  s.ios.deployment_target = '13.0'
   s.static_framework = true
 end
 
