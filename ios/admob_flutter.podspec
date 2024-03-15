@@ -4,7 +4,7 @@
 Pod::Spec.new do |s|
   s.name             = 'admob_flutter'
   s.version          = '4.0.0'
-  s.swift_version    = '7.0'
+  s.swift_version    = '5.0'
   s.summary          = 'Admob plugin that shows banner ads using native platform views.'
   s.description      = <<-DESC
 Admob plugin that shows banner ads using native platform views.
